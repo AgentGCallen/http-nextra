@@ -11,7 +11,6 @@ class Router {
 	 * @param {string} path The path of this router
 	 */
     constructor(server, path) {
-        path = url.parse(path).pathname;
         /**
 		 * @since 0.0.1
 		 * @type {APIServer}
