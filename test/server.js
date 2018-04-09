@@ -1,16 +1,14 @@
-const { APIServer } = require('../index');
+const { APIServer } = require("../index");
 
-const server = new APIServer(async (request, response) => {
-	if (!await server.router.runPath(request.url.slice(1).split('/'), request, response, {})) {
-		response.end('Hello!');
-	}
+const server = new APIServer();
+
+server.listen(5000, (error) => {
+    if (error) console.error("Something happened: ", error);
+    else console.log("Server is up!");
 });
 
-server.listen('5000', (error) => {
-	if (error) console.error('Something happened: ', error);
-	else console.log('Server is up!');
-});
-
-server.router.get('api/guilds/:guild/members/:member', (request, response, { guild, member }) => {
-	response.end(`The selected guild is: ${guild}, and member is: ${member}`);
+server.get("text/:text", (req, res, { text }) => {
+    console.log(res.constructor);
+    if (req.query.json) return res.json({ text });
+    return res.end(text);
 });
