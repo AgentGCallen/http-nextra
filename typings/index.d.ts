@@ -51,7 +51,7 @@ declare module "http-nextra" {
         public _variable: boolean;
         public path: string;
 
-        public add<T = {}>(name: string, method: string, condition?: Function, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public add<T = {}>(name: string, method: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
         public isPath(parts: string[], request: Request, response: Response, options?: object): any;
         public runPath(parts: string[], request: Request, response: Response, options?: object): any;
 
