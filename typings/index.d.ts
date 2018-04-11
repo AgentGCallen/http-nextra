@@ -133,6 +133,6 @@ declare module "http-nextra" {
         middlewares?: Function[];
     };
 
-    export type MethodsHandler<T = {}> = (req: Request, res: Response, params?: T) => any;
+    export type MethodsHandler<T = { [x: string]: string; }> = (req: Request, res: Response, params?: T) => any;
 
 }
