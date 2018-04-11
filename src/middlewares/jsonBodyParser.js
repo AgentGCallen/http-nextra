@@ -1,7 +1,7 @@
 const zlib = require("zlib");
 
 module.exports = (req) => new Promise((res, rej) => {
-    if (req.method !== "POST") return;
+    if (req.method !== "POST") return res(true);
     const stream = contentStream(req);
 
     let chunk = "";
@@ -14,9 +14,9 @@ module.exports = (req) => new Promise((res, rej) => {
         try {
             const data = JSON.parse(chunk);
             req.body = data;
-            return res(data);
+            return res(true);
         } catch (err) {
-            return rej(err);
+            return rej(false);
         }
     });
 });
