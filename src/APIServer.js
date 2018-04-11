@@ -3,13 +3,20 @@ const Response = require("./structures/Response");
 const Request = require("./structures/Request");
 const Router = require("./Router/Router");
 
-ServerResponse.prototype = new Response(IncomingMessage);
+ServerResponse.prototype = new Response(Request);
 IncomingMessage.prototype = new Request(Server);
 
 class APIServer extends Server {
 
-    constructor(requestListener) {
-        super(requestListener || ((request, response) => this.router.runPath(request.url.slice(1).split("/"), request, response, {})));
+    constructor(options = {}) {
+        super(options.requestListener || (async (request, response) => {
+            request.res = response;
+            response.req = request;
+            if (options.middlewares) {
+                for (const middleware of options.middlewares) await middleware(request, response);
+            }
+            this.router.runPath(request.path.slice(1).split("/"), request, response, {});
+        }));
 
         /**
 		 * The main router

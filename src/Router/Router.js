@@ -1,6 +1,5 @@
 const Piece = require("./Piece");
 const { METHODS } = require("http");
-const url = require("url");
 
 class Router {
 
@@ -76,7 +75,6 @@ class Router {
 	 * @private
 	 */
     isPath(parts, request, response, options) {
-        console.log(this.path, parts[0], options);
         if (this.path === parts[0] || this._variable) {
             if (this._variable) [options[this.path]] = parts;
             if (parts.length === 1) {
@@ -99,7 +97,6 @@ class Router {
 	 * @private
 	 */
     runPath(parts, request, response, options) {
-        parts = parts.map(path => url.parse(path).pathname);
         const piece = this.paths.find(path => path.isPath(parts, request, response, options));
         if (!piece) {
             if (this._onAll) return this._onAll(request, response, options);

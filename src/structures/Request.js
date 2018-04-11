@@ -10,6 +10,15 @@ class Request extends IncomingMessage {
         return querystring.parse(parsedurl.query);
     }
 
+    get path() {
+        if (!this.url) return;
+        return url.parse(this.url).pathname;
+    }
+
+    get(name) {
+        return this.headers[name.toLowerCase()];
+    }
+
 }
 
 module.exports = Request;

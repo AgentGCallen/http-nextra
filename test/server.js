@@ -1,6 +1,6 @@
-const { APIServer } = require("../index");
+const { APIServer, json } = require("../index");
 
-const server = new APIServer();
+const server = new APIServer({ middlewares: [json] });
 
 server.listen(5000, (error) => {
     if (error) console.error("Something happened: ", error);
@@ -8,7 +8,29 @@ server.listen(5000, (error) => {
 });
 
 server.get("text/:text", (req, res, { text }) => {
-    console.log(res.constructor);
     if (req.query.json) return res.json({ text });
-    return res.end(text);
+    return res.send(text);
 });
+
+server.get("json", (req, res) => {
+    res.status(200).json({
+        guildID: "397700693131264000",
+        userID: "414512049679237122",
+        roles: ["397700693131264000", "397701181419290634", "397713972331282434"],
+        joinedTimestamp: 1518991786341,
+        lastMessageChannelID: "397701415620837406",
+        displayName: "Trident"
+    });
+});
+
+server.get("/error", (req, res) => res.status(500).json({ error: "YA TWAT" }));
+
+server.get("/auth", (req, res) => {
+    const token = req.get("Authorization");
+    if (!token) return res.json({ message: "You little twat come here before i ban you from discord -b1nzy" });
+    if (token === "jacz") return true;
+}, (req, res) => {
+    res.json({ message: "Authorized" });
+});
+
+server.post("info", (req, res) => res.status(200).json({ message: "Data recieved", data: req.body }));
