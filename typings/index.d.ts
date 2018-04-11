@@ -47,8 +47,8 @@ declare module "http-nextra" {
 
         public server: APIServer;
         public paths: Array<Router | Piece>;
-        public _onAll?: Function;
-        public _variable: boolean;
+        private _onAll?: Function;
+        private _variable: boolean;
         public path: string;
 
         public add<T = {}>(name: string, method: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
@@ -96,8 +96,8 @@ declare module "http-nextra" {
         public _variable: boolean;
         public name: string;
         public method: string;
-        public _condition?: Function;
-        public _callback: Function;
+        private _condition?: Function;
+        private _callback: Function;
 
         public run(request: Request, response: Response, options?: object);
         public isPath(parts: string[], request: Request, response: Response, options?: object);
