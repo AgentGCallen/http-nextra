@@ -8,38 +8,38 @@ declare module "http-nextra" {
 
         public router: Router;
 
-        public acl(name: string, condition?: Function, callback?: Function): this;
-        public bind(name: string, condition?: Function, callback?: Function): this;
-        public checkout(name: string, condition?: Function, callback?: Function): this;
-        public connect(name: string, condition?: Function, callback?: Function): this;
-        public copy(name: string, condition?: Function, callback?: Function): this;
-        public delete(name: string, condition?: Function, callback?: Function): this;
-        public get(name: string, condition?: Function, callback?: Function): this;
-        public head(name: string, condition?: Function, callback?: Function): this;
-        public link(name: string, condition?: Function, callback?: Function): this;
-        public lock(name: string, condition?: Function, callback?: Function): this;
-        public merge(name: string, condition?: Function, callback?: Function): this;
-        public mkactivity(name: string, condition?: Function, callback?: Function): this;
-        public mkcalendar(name: string, condition?: Function, callback?: Function): this;
-        public mkcol(name: string, condition?: Function, callback?: Function): this;
-        public move(name: string, condition?: Function, callback?: Function): this;
-        public notify(name: string, condition?: Function, callback?: Function): this;
-        public options(name: string, condition?: Function, callback?: Function): this;
-        public patch(name: string, condition?: Function, callback?: Function): this;
-        public post(name: string, condition?: Function, callback?: Function): this;
-        public propfind(name: string, condition?: Function, callback?: Function): this;
-        public proppatch(name: string, condition?: Function, callback?: Function): this;
-        public purge(name: string, condition?: Function, callback?: Function): this;
-        public put(name: string, condition?: Function, callback?: Function): this;
-        public rebind(name: string, condition?: Function, callback?: Function): this;
-        public report(name: string, condition?: Function, callback?: Function): this;
-        public search(name: string, condition?: Function, callback?: Function): this;
-        public subscribe(name: string, condition?: Function, callback?: Function): this;
-        public trace(name: string, condition?: Function, callback?: Function): this;
-        public unbind(name: string, condition?: Function, callback?: Function): this;
-        public unlink(name: string, condition?: Function, callback?: Function): this;
-        public unlock(name: string, condition?: Function, callback?: Function): this;
-        public unsubscribe(name: string, condition?: Function, callback?: Function): this;
+        public acl<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public bind<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public checkout<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public connect<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public copy<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public delete<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public get<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public head<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public link<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public lock<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public merge<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public mkactivity<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public mkcalendar<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public mkcol<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public move<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public notify<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public options<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public patch<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public post<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public propfind<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public proppatch<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public purge<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public put<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public rebind<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public report<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public search<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public subscribe<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public trace<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public unbind<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public unlink<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public unlock<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public unsubscribe<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
     }
 
     export class Router {
@@ -51,42 +51,42 @@ declare module "http-nextra" {
         public _variable: boolean;
         public path: string;
 
-        public add(name: string, method: string, condition?: Function, callback?: Function): this;
+        public add<T = {}>(name: string, method: string, condition?: Function, callback?: (req: Request, res: Response, params?: T) => any): this;
         public isPath(parts: string[], request: Request, response: Response, options?: object): any;
         public runPath(parts: string[], request: Request, response: Response, options?: object): any;
 
-        public acl(name: string, condition?: Function, callback?: Function): this;
-        public bind(name: string, condition?: Function, callback?: Function): this;
-        public checkout(name: string, condition?: Function, callback?: Function): this;
-        public connect(name: string, condition?: Function, callback?: Function): this;
-        public copy(name: string, condition?: Function, callback?: Function): this;
-        public delete(name: string, condition?: Function, callback?: Function): this;
-        public get(name: string, condition?: Function, callback?: Function): this;
-        public head(name: string, condition?: Function, callback?: Function): this;
-        public link(name: string, condition?: Function, callback?: Function): this;
-        public lock(name: string, condition?: Function, callback?: Function): this;
-        public merge(name: string, condition?: Function, callback?: Function): this;
-        public mkactivity(name: string, condition?: Function, callback?: Function): this;
-        public mkcalendar(name: string, condition?: Function, callback?: Function): this;
-        public mkcol(name: string, condition?: Function, callback?: Function): this;
-        public move(name: string, condition?: Function, callback?: Function): this;
-        public notify(name: string, condition?: Function, callback?: Function): this;
-        public options(name: string, condition?: Function, callback?: Function): this;
-        public patch(name: string, condition?: Function, callback?: Function): this;
-        public post(name: string, condition?: Function, callback?: Function): this;
-        public propfind(name: string, condition?: Function, callback?: Function): this;
-        public proppatch(name: string, condition?: Function, callback?: Function): this;
-        public purge(name: string, condition?: Function, callback?: Function): this;
-        public put(name: string, condition?: Function, callback?: Function): this;
-        public rebind(name: string, condition?: Function, callback?: Function): this;
-        public report(name: string, condition?: Function, callback?: Function): this;
-        public search(name: string, condition?: Function, callback?: Function): this;
-        public subscribe(name: string, condition?: Function, callback?: Function): this;
-        public trace(name: string, condition?: Function, callback?: Function): this;
-        public unbind(name: string, condition?: Function, callback?: Function): this;
-        public unlink(name: string, condition?: Function, callback?: Function): this;
-        public unlock(name: string, condition?: Function, callback?: Function): this;
-        public unsubscribe(name: string, condition?: Function, callback?: Function): this;
+        public acl<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public bind<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public checkout<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public connect<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public copy<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public delete<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public get<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public head<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public link<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public lock<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public merge<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public mkactivity<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public mkcalendar<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public mkcol<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public move<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public notify<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public options<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public patch<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public post<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public propfind<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public proppatch<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public purge<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public put<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public rebind<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public report<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public search<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public subscribe<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public trace<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public unbind<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public unlink<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public unlock<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
+        public unsubscribe<T = {}>(name: string, condition?: (req: Request, res: Response, params?: T) => any, callback?: (req: Request, res: Response, params?: T) => any): this;
     }
 
     export class Piece {
@@ -105,7 +105,7 @@ declare module "http-nextra" {
 
     export class Response extends ServerResponse {
         public json(data: any[] | object): this;
-        public statusCode(code: number): this;
+        public status(code: number): this;
         public set(field: string | object, value?: string | string[]): this;
         public get(field: string): string | number | string[];
         public type(type: string): this;
@@ -132,4 +132,5 @@ declare module "http-nextra" {
         requestListener?: Function;
         middlewares?: Function[];
     };
+
 }
