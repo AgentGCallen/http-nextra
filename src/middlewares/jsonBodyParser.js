@@ -2,6 +2,9 @@ const zlib = require("zlib");
 
 module.exports = (req) => new Promise((res, rej) => {
     if (req.method !== "POST") return res(true);
+
+    req.body = {};
+
     const stream = contentStream(req);
 
     let chunk = "";

@@ -90,7 +90,7 @@ declare module "http-nextra" {
     }
 
     export class Piece {
-        public constructor(router: Router, name: string, method: string, condition?: Function, callback: Function);
+        public constructor(router: Router, name: string, method: string, condition?: MethodsHandler, callback: MethodsHandler);
 
         public type: string;
         public _variable: boolean;
@@ -104,15 +104,22 @@ declare module "http-nextra" {
     }
 
     export class Response extends ServerResponse {
+        public req: Request;
+
         public json(data: any[] | object): this;
         public status(code: number): this;
         public set(field: string | object, value?: string | string[]): this;
         public get(field: string): string | number | string[];
         public type(type: string): this;
-        public send(body: string | number | boolean | object | Buffer): this;
+        public send(body: any): this;
+        public end(...args): this;
     }
 
     export class Request extends IncomingMessage {
+        public constructor(socket: Server);
+        
+        public res: Response;
+
         public get query(): object;
         public get path(): string;
         public get(name: string): string | string[];
@@ -124,15 +131,11 @@ declare module "http-nextra" {
 
     export function cors(req: Request, res: Response): boolean;
 
-    export class Util {
-        public static setCharset(type: string, charset: string): object;
-    }
-
     export type APIServerOptions = {
         requestListener?: Function;
         middlewares?: Function[];
     };
 
-    export type MethodsHandler<T = { [x: string]: string; }> = (req: Request, res: Response, params?: T) => any;
+    export type MethodsHandler<T = { [param: string]: string; }> = (req: Request, res: Response, params?: T) => any;
 
 }

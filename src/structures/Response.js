@@ -38,11 +38,11 @@ class Response extends ServerResponse {
     }
 
     send(body) {
-        let chunk = body;
+        let len = 0;
         let encoding = "";
         let type = "";
 
-        switch (typeof chunk) {
+        switch (typeof body) {
             case "string": {
                 if (!this.get("Content-Type")) this.type("text");
                 break;
@@ -50,17 +50,17 @@ class Response extends ServerResponse {
             case "boolean":
             case "number":
             case "object": {
-                if (!chunk) break;
-                if (Buffer.isBuffer(chunk)) {
+                if (!body) break;
+                if (Buffer.isBuffer(body)) {
                     if (!this.get("Content-Type")) this.type("bin");
                 } else {
-                    this.json(chunk);
+                    this.json(body);
                 }
                 break;
             }
         }
 
-        if (typeof chunk === "string") {
+        if (typeof body === "string") {
             encoding = "utf8";
             type = this.get("Content-Type");
             // reflect this in content-type
@@ -68,18 +68,15 @@ class Response extends ServerResponse {
         }
 
         // Set Content-Length
-        let len;
-        if (chunk !== undefined) {
-            if (Buffer.isBuffer(chunk)) len = chunk.length;
-            else if (chunk.length < 1000) len = Buffer.byteLength(chunk, encoding);
-            chunk = Buffer.from(chunk, encoding);
-            encoding = undefined;
-            len = chunk.length;
-            this.set("Content-Length", len);
-        }
+        if (Buffer.isBuffer(body)) len = body.length;
+        else if (body.length < 1000) len = Buffer.byteLength(body, encoding);
+        body = Buffer.from(body, encoding);
+        encoding = undefined;
+        len = body.length;
+        this.set("Content-Length", len);
 
-        if (this.req && this.req.method === "HEAD") this.end();
-        else this.end(chunk, encoding);
+        if (this.req.method === "HEAD") this.end();
+        else this.end(body, encoding);
 
         return this;
     }

@@ -7,6 +7,5 @@ module.exports = {
     constants: require("./src/util/constants"),
     json: require("./src/middlewares/jsonBodyParser.js"),
     cors: require("./src/middlewares/cors"),
-    Util: require("./src/util/Util"),
     version: require("./package.json").version
 };
