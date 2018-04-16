@@ -16,7 +16,7 @@ module.exports = (req) => new Promise((res, rej) => {
             req.body = data;
             return res(true);
         } catch (err) {
-            return rej(false);
+            req.body = {};
         }
     });
 });
