@@ -129,10 +129,11 @@ declare module "http-nextra" {
     }
 
     export type APIServerOptions = {
-        requestListener?: Function;
-        middlewares?: Function[];
+        requestListener?: APIServerOptionsFunctions;
+        middlewares?: APIServerOptionsFunctions[];
     };
 
     export type MethodsHandler<T = { [x: string]: string; }> = (req: Request, res: Response, params?: T) => any;
+    export type APIServerOptionsFunctions = (req: Request, res: Response) => any;               
 
 }
