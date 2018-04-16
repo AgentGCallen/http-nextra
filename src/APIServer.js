@@ -13,10 +13,7 @@ class APIServer extends Server {
             request.res = response;
             response.req = request;
             if (options.middlewares) {
-                for (const middleware of options.middlewares) {
-                    const pass = await middleware(request, response);
-                    if (pass === false) return;
-                }
+                for (const middleware of options.middlewares) await middleware(request, response);
             }
             this.router.runPath(request.path.slice(1).split("/"), request, response, {});
         }));
