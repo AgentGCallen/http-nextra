@@ -1,4 +1,4 @@
-const { ServerResponse } = require("http");
+const { ServerResponse, STATUS_CODES } = require("http");
 const mime = require("../util/mime");
 const util = require("../util/Util");
 
@@ -79,6 +79,21 @@ class Response extends ServerResponse {
         else this.end(body, encoding);
 
         return this;
+    }
+
+    location(url) {
+        // "back" is an alias for the referrer
+        if (url === "back") url = this.req.get("Referrer") || "/";
+        // set location
+        return this.set("Location", util.encodeUrl(url));
+    }
+
+    redirect(url) {
+        const status = 302;
+        // Set location header
+        url = this.location(url).get("Location");
+
+        return this.status(status).send(`${STATUS_CODES[status]}. Redirecting to ${url}`);
     }
 
 }

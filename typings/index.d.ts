@@ -112,12 +112,11 @@ declare module "http-nextra" {
         public get(field: string): string | number | string[];
         public type(type: string): this;
         public send(body: any): this;
-        public end(...args): this;
+        public location(url: string): this;
+        public redirect(url: string): this;
     }
 
     export class Request extends IncomingMessage {
-        public constructor(socket: Server);
-        
         public res: Response;
 
         public get query(): object;
