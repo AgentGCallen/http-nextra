@@ -131,10 +131,11 @@ declare module "http-nextra" {
     export function cors(req: Request, res: Response): boolean;
 
     export type APIServerOptions = {
-        requestListener?: Function;
-        middlewares?: Function[];
+        requestListener?: APIServerOptionsFunctions;
+        middlewares?: APIServerOptionsFunctions[];
     };
 
-    export type MethodsHandler<T = { [param: string]: string; }> = (req: Request, res: Response, params?: T) => any;
+    export type MethodsHandler<T = { [x: string]: string; }> = (req: Request, res: Response, params?: T) => any;
+    export type APIServerOptionsFunctions = (req: Request, res: Response) => any;               
 
 }
