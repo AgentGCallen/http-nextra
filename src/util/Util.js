@@ -33,6 +33,32 @@ class Util {
             .replace(ENCODE_CHARS_REGEXP, encodeURI);
     }
 
+    static compose(middlewares) {
+        if (!Array.isArray(middlewares)) throw new TypeError("MIDDLEWARE: Middlewares must be an array");
+        for (const fn of middlewares) {
+            if (typeof fn !== "function") throw new TypeError("MIDDLEWARE: Middlewares must be functions");
+        }
+
+        return (req, res, next) => {
+            // last called middleware #
+            let index = -1;
+            return dispatch(0);
+            function dispatch(i) {
+                if (i <= index) return Promise.reject(new Error("MIDDLEWARE: next() called too many times (multiple)"));
+                index = i;
+                let fn = middlewares[i];
+                if (middlewares.length === i) fn = next;
+                if (!fn) return Promise.resolve();
+                try {
+                    return Promise.resolve(fn(req, res, () => dispatch(i + 1)));
+                } catch (err) {
+                    return Promise.reject(err);
+                }
+            }
+        };
+    }
+
+
 }
 
 module.exports = Util;

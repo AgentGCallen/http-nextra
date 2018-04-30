@@ -7,6 +7,13 @@ declare module "http-nextra" {
         public constructor(options?: APIServerOptions);
 
         public router: Router;
+        public middlewares: Function[];
+        public Request: Request;
+        public Response: Response;
+        public onError: Function;
+
+        public use(fn: MiddlewareFunction): this;
+        public _handler(req: Request, res: Request): void;
 
         public acl<T = {}>(name: string, condition?: MethodsHandler, callback?: MethodsHandler): this;
         public bind<T = {}>(name: string, condition?: MethodsHandler, callback?: MethodsHandler): this;
@@ -106,6 +113,9 @@ declare module "http-nextra" {
     export class Response extends ServerResponse {
         public req: Request;
 
+        public server: APIServer;
+        public req: Request;
+
         public json(data: any[] | object): this;
         public status(code: number): this;
         public set(field: string | object, value?: string | string[]): this;
@@ -117,6 +127,9 @@ declare module "http-nextra" {
     }
 
     export class Request extends IncomingMessage {
+        public res: Response;
+
+        public server: APIServer;
         public res: Response;
 
         public get query(): object;
@@ -131,11 +144,13 @@ declare module "http-nextra" {
     export function cors(req: Request, res: Response): boolean;
 
     export type APIServerOptions = {
-        requestListener?: APIServerOptionsFunctions;
-        middlewares?: APIServerOptionsFunctions[];
+        request?: Request;
+        response?: Response;
+        onError?: Function;
     };
 
     export type MethodsHandler<T = { [x: string]: string; }> = (req: Request, res: Response, params?: T) => any;
     export type APIServerOptionsFunctions = (req: Request, res: Response) => any;               
+    export type MiddlewareFunction = (req: Request, res: Response, next: Function) => any;
 
 }

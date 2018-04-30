@@ -1,35 +1,26 @@
 const zlib = require("zlib");
 
-module.exports = (req) => new Promise((res, rej) => {
-    if (req.method !== "POST") return res(true);
-
+module.exports = async (req) => {
+    if (req.method !== "POST") return;
     req.body = {};
 
     const stream = contentStream(req);
 
-    let chunk = "";
+    let body = "";
 
-    stream.on("data", data => {
-        chunk += data;
-    });
-
-    stream.on("end", () => {
-        try {
-            const data = JSON.parse(chunk);
-            req.body = data;
-            return res(true);
-        } catch (err) {
-            req.body = {};
-        }
-    });
-});
+    for await (const chunk of stream) body += chunk;
+    try {
+        const data = JSON.parse(body);
+        req.body = data;
+    } catch (WhatsThis) {
+        req.body = {};
+    }
+};
 
 function contentStream(req) {
-    const encoding = (req.headers["content-encoding"] || "identity").toLowerCase();
     const length = req.headers["content-length"];
     let stream;
-
-    switch (encoding) {
+    switch (req.headers["content-encoding"].toLowerCase()) {
         case "deflate":
             stream = zlib.createInflate();
             req.pipe(stream);
@@ -44,6 +35,5 @@ function contentStream(req) {
             break;
         default: return;
     }
-
     return stream;
 }

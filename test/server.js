@@ -1,6 +1,16 @@
-const { APIServer, json } = require("../index");
+const { APIServer } = require("../index");
 
-const server = new APIServer({ middlewares: [json] });
+const server = new APIServer();
+
+server.use((req, res, next) => {
+    const start = Date.now();
+    return next().then(() => {
+        const ms = Date.now() - start;
+        console.log(`${req.method} ${req.url} - ${ms}ms`);
+    });
+});
+
+server.use(() => console.log("hello world"));
 
 server.listen(5000, (error) => {
     if (error) console.error("Something happened: ", error);
