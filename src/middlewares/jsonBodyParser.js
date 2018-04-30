@@ -20,7 +20,7 @@ module.exports = async (req) => {
 function contentStream(req) {
     const length = req.headers["content-length"];
     let stream;
-    switch (req.headers["content-encoding"].toLowerCase()) {
+    switch ((req.headers["content-encoding"] || "identity").toLowerCase()) {
         case "deflate":
             stream = zlib.createInflate();
             req.pipe(stream);
