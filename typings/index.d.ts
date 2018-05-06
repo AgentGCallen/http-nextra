@@ -16,7 +16,7 @@ declare module "http-nextra" {
         public use(fn: MiddlewareFunction): this;
         public _handler(req: Request, res: Request): void;
 
-        static _handleMiddleware(middlewares: MiddlewareFunction[], req: Request, res: Response): Promise<any>;
+        public static _handleMiddleware(middlewares: MiddlewareFunction[], req: Request, res: Response): Promise<any>;
 
         public acl<T = {}>(name: string, condition?: MethodsHandler, callback?: MethodsHandler): this;
         public bind<T = {}>(name: string, condition?: MethodsHandler, callback?: MethodsHandler): this;
