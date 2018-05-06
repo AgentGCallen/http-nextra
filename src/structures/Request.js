@@ -1,18 +1,21 @@
 const { IncomingMessage } = require("http");
 const url = require("url");
-const querystring = require("querystring");
 
 class Request extends IncomingMessage {
 
+    get _parsedUrl() {
+        if (!this.url) return {};
+        return url.parse(this.url, true);
+    }
+
     get query() {
         if (!this.url) return {};
-        const parsedurl = url.parse(this.url);
-        return querystring.parse(parsedurl.query);
+        return this._parsedUrl.query;
     }
 
     get path() {
-        if (!this.url) return;
-        return url.parse(this.url).pathname;
+        if (!this.url) return "";
+        return this._parsedUrl.pathname;
     }
 
     get(name) {

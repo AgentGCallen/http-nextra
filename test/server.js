@@ -1,15 +1,8 @@
-const { APIServer } = require("../index");
+const { Server, json } = require("../index");
 
-const server = new APIServer();
+const server = new Server();
 
-server.use((req, res, next) => {
-    const start = Date.now();
-    return next().then(() => {
-        const ms = Date.now() - start;
-        console.log(`${req.method} ${req.url} - ${ms}ms`);
-    });
-});
-
+server.use(json);
 server.use(() => console.log("hello world"));
 
 server.listen(5000, (error) => {
@@ -37,7 +30,10 @@ server.get("/error", (req, res) => res.status(500).json({ error: "YA TWAT" }));
 
 server.get("/auth", (req, res) => {
     const token = req.get("Authorization");
-    if (!token) return res.json({ message: "You little twat come here before i ban you from discord -b1nzy" });
+    if (!token) {
+        res.json({ message: "You little twat come here before i ban you from discord -b1nzy" });
+        return false;
+    }
     if (token === "jacz") return true;
 }, (req, res) => {
     res.json({ message: "Authorized" });

@@ -1,19 +1,22 @@
 declare module "http-nextra" {
-    import { Server, ServerResponse, IncomingMessage } from "http";
+    import { Server as HTTPServer, ServerResponse, IncomingMessage } from "http";
+    import { UrlWithParsedQuery } from "url";
 
     export const version: string;
 
-    export class APIServer extends Server {
+    export class Server extends HTTPServer {
         public constructor(options?: APIServerOptions);
 
         public router: Router;
-        public middlewares: Function[];
+        public middlewares: MiddlewareFunction[];
         public Request: Request;
         public Response: Response;
         public onError: Function;
 
         public use(fn: MiddlewareFunction): this;
         public _handler(req: Request, res: Request): void;
+
+        static _handleMiddleware(middlewares: MiddlewareFunction[], req: Request, res: Response): Promise<any>;
 
         public acl<T = {}>(name: string, condition?: MethodsHandler, callback?: MethodsHandler): this;
         public bind<T = {}>(name: string, condition?: MethodsHandler, callback?: MethodsHandler): this;
@@ -132,16 +135,15 @@ declare module "http-nextra" {
         public server: APIServer;
         public res: Response;
 
-        public get query(): object;
-        public get path(): string;
+        public readonly get _parsedUrl(): UrlWithParsedQuery;
+        public readonly get query(): object;
+        public readonly get path(): string;
         public get(name: string): string | string[];
     }
 
     export const constants: object;
 
     export function json(req: Request): Promise<boolean>;
-
-    export function cors(req: Request, res: Response): boolean;
 
     export type APIServerOptions = {
         request?: Request;
@@ -150,7 +152,5 @@ declare module "http-nextra" {
     };
 
     export type MethodsHandler<T = { [x: string]: string; }> = (req: Request, res: Response, params?: T) => any;
-    export type APIServerOptionsFunctions = (req: Request, res: Response) => any;               
-    export type MiddlewareFunction = (req: Request, res: Response, next: Function) => any;
-
+    export type MiddlewareFunction = (req: Request, res: Response) => any;
 }

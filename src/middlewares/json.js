@@ -1,21 +1,25 @@
 const zlib = require("zlib");
 
-module.exports = async (req) => {
-    if (req.method !== "POST") return;
+module.exports = (req) => new Promise((resolve, reject) => {
+    if (req.method !== "POST") return resolve(true);
     req.body = {};
 
     const stream = contentStream(req);
 
     let body = "";
 
-    for await (const chunk of stream) body += chunk;
-    try {
-        const data = JSON.parse(body);
-        req.body = data;
-    } catch (WhatsThis) {
-        req.body = {};
-    }
-};
+    stream.on("data", chunk => body += chunk); // eslint-disable-line no-return-assign
+    stream.on("end", () => {
+        try {
+            const data = JSON.parse(body);
+            req.body = data;
+            resolve(data);
+        } catch (WhatsThis) {
+            req.body = {};
+            reject(WhatsThis);
+        }
+    });
+});
 
 function contentStream(req) {
     const length = req.headers["content-length"];

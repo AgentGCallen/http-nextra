@@ -59,10 +59,10 @@ class Piece {
             true;
 
         if (shouldRun) {
-            this._callback(request, response, options);
+            await this._callback(request, response, options);
             return true;
         } else if (this._onInhibit) {
-            this._onInhibit(request, response, options);
+            await this._onInhibit(request, response, options);
             return true;
         }
         return false;

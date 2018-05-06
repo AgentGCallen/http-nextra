@@ -40,7 +40,6 @@ class Response extends ServerResponse {
     send(body) {
         let len = 0;
         let encoding = "";
-        let type = "";
 
         switch (typeof body) {
             case "string": {
@@ -58,13 +57,6 @@ class Response extends ServerResponse {
                 }
                 break;
             }
-        }
-
-        if (typeof body === "string") {
-            encoding = "utf8";
-            type = this.get("Content-Type");
-            // reflect this in content-type
-            if (typeof type === "string") this.set("Content-Type", util.setCharset(type, "utf-8"));
         }
 
         // Set Content-Length
@@ -89,11 +81,10 @@ class Response extends ServerResponse {
     }
 
     redirect(url) {
-        const status = 302;
         // Set location header
         url = this.location(url).get("Location");
 
-        return this.status(status).send(`${STATUS_CODES[status]}. Redirecting to ${url}`);
+        return this.status(302).send(`${STATUS_CODES[302]}. Redirecting to ${url}`);
     }
 
 }
